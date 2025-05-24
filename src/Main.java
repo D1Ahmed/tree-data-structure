@@ -188,7 +188,7 @@ class BST{
 
         else if(val< root.data)
         {
-            Node n= search(root,val);
+            Node n= search(root.left,val);
             if(n.right!=null)
             {
                 Node slider =n;
@@ -203,6 +203,43 @@ class BST{
                 }
                 n.data=slider.data; //slider is at the max node in the left sub tree;
                 parent.right=null;
+            }
+            else {
+                Node slider =root;
+                Node parent=slider;
+                while(slider.right!=null)
+                {
+                    if(slider.right!=null)
+                    {
+                        parent=slider;
+                    }
+                    slider=slider.right;
+                }
+                parent.right=null;
+            }
+        }
+        // NOW SEARCH in right sub tree if value to be Del is greater than root.
+        // replace the with smalles in its left sub tree
+        else if (val> root.data)
+        {
+            Node n= search(root.right,val);
+            if(n.left==null) // if its a leaf node
+            { // find parent and delete node
+                Node slider = root.right;
+                Node parent=slider;
+                while(slider.left!=null)
+                {
+                    if(slider.left!=null)
+                    {
+                        parent=slider;
+                    }
+                    slider=slider.left;
+                }
+                parent.left=null;
+
+            }
+            else { // if its from mid
+
             }
         }
     }
@@ -222,7 +259,7 @@ public class Main {
         bst1.inorder(bst1.root);
       bst1.searchh(bst1.root,90);
 
-      bst1.delete(bst1.root,10);
+      bst1.delete(bst1.root,18);
 
         bst1.inorder(bst1.root);
 
